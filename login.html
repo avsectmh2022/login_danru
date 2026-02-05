@@ -3,87 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Akses Terbatas</title>
+    <title>Multi-Access Portal</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 300px;
-        }
-        h2 { color: #333; margin-bottom: 1.5rem; }
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        button:hover { background-color: #0056b3; }
-        #message {
-            margin-top: 1rem;
-            font-size: 14px;
-            color: #d9534f; /* Warna merah untuk error */
-            display: none;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; display: flex; height: 100vh; align-items: center; justify-content: center; margin: 0; }
+        .box { background: #252525; padding: 40px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.7); text-align: center; width: 320px; }
+        h3 { margin-bottom: 20px; color: #00cf5d; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #444; border-radius: 8px; background: #333; color: white; box-sizing: border-box; text-align: center; font-size: 16px; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 8px; background: #00cf5d; color: black; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #00fa70; transform: translateY(-2px); }
+        #err { color: #ff4d4d; font-size: 14px; margin-top: 15px; display: none; }
     </style>
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Masukkan Passcode</h2>
-    <input type="password" id="passcodeField" placeholder="Ketik passcode di sini...">
-    <button onclick="checkPasscode()">Masuk</button>
-    <p id="message">Passcode salah, coba lagi!</p>
+<div class="box">
+    <h3>Private Access</h3>
+    <input type="password" id="pc" placeholder="Masukkan Passcode">
+    <button onclick="verify()">Buka Akses</button>
+    <p id="err">Passcode salah atau tidak terdaftar!</p>
 </div>
 
 <script>
-    function checkPasscode() {
-        const input = document.getElementById('passcodeField').value;
-        const message = document.getElementById('message');
-        
-        // --- KONFIGURASI DI SINI ---
-        const correctPasscode = "12345"; // Ganti dengan passcode pilihanmu
-        const redirectUrl = "https://www.appsheet.com/start/264e1317-28d1-442d-b41e-743485b03dad"; // Ganti ke link tujuanmu
-        // ---------------------------
+    function verify() {
+        const input = document.getElementById('pc').value;
+        const err = document.getElementById('err');
 
-        if (input === correctPasscode) {
-            window.location.href = redirectUrl;
-        } else {
-            message.style.display = "block";
-            document.getElementById('passcodeField').value = ""; // Reset field
+        const code1 = "QXZzZWMxMjM="; 
+        const link1 = "aHR0cHM6Ly93d3cuYXBwc2hlZXQuY29tL3N0YXJ0LzI2NGUxMzE3LTI4ZDEtNDQyZC1iNDFlLTc0MzQ4NWIwM2RhZA==";
+
+        const code2 = "dXNlcjI="; 
+        const link2 = "aHR0cHM6Ly95b3V0dWJlLmNvbQ==";
+
+        const code3 = "dXNlcjM="; 
+        const link3 = "aHR0cHM6Ly9naXRodWIuY29t";
+
+        // --------------------------------------------
+
+        if (encodedInput === code1) {
+            window.location.href = atob(link1);
+        } 
+        else if (encodedInput === code2) {
+            window.location.href = atob(link2);
+        } 
+        else if (encodedInput === code3) {
+            window.location.href = atob(link3);
+        } 
+        else {
+            err.style.display = "block";
+            document.getElementById('pc').value = ""; // Bersihkan input jika salah
         }
     }
 
-    // Fitur tekan 'Enter' untuk submit
-    document.getElementById('passcodeField').addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            checkPasscode();
-        }
+    // Fungsi Enter key
+    document.getElementById('pc').addEventListener("keyup", function(e) {
+        if (e.key === "Enter") verify();
     });
 </script>
 
