@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Akses Terbatas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 { color: #333; margin-bottom: 1.5rem; }
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #0056b3; }
+        #message {
+            margin-top: 1rem;
+            font-size: 14px;
+            color: #d9534f; /* Warna merah untuk error */
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Masukkan Passcode</h2>
+    <input type="password" id="passcodeField" placeholder="Ketik passcode di sini...">
+    <button onclick="checkPasscode()">Masuk</button>
+    <p id="message">Passcode salah, coba lagi!</p>
+</div>
+
+<script>
+    function checkPasscode() {
+        const input = document.getElementById('passcodeField').value;
+        const message = document.getElementById('message');
+        
+        // --- KONFIGURASI DI SINI ---
+        const correctPasscode = "12345"; // Ganti dengan passcode pilihanmu
+        const redirectUrl = "https://www.appsheet.com/start/264e1317-28d1-442d-b41e-743485b03dad"; // Ganti ke link tujuanmu
+        // ---------------------------
+
+        if (input === correctPasscode) {
+            window.location.href = redirectUrl;
+        } else {
+            message.style.display = "block";
+            document.getElementById('passcodeField').value = ""; // Reset field
+        }
+    }
+
+    // Fitur tekan 'Enter' untuk submit
+    document.getElementById('passcodeField').addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            checkPasscode();
+        }
+    });
+</script>
+
+</body>
+</html>
