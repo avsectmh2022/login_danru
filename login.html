@@ -27,13 +27,21 @@
     function verify() {
         const input = document.getElementById('pc').value;
         const err = document.getElementById('err');
+        
+        // Mengubah input user ke Base64 untuk pencocokan
+        const encodedInput = btoa(input);
 
+        // --- KONFIGURASI PASSCODE & LINK (Base64) ---
+        
+        // 1. Passcode: "user1" -> Link Admin
         const code1 = "QXZzZWMxMjM="; 
         const link1 = "aHR0cHM6Ly93d3cuYXBwc2hlZXQuY29tL3N0YXJ0LzI2NGUxMzE3LTI4ZDEtNDQyZC1iNDFlLTc0MzQ4NWIwM2RhZA==";
 
+        // 2. Passcode: "user2" -> Link: youtube.com
         const code2 = "dXNlcjI="; 
         const link2 = "aHR0cHM6Ly95b3V0dWJlLmNvbQ==";
 
+        // 3. Passcode: "user3" -> Link: github.com
         const code3 = "dXNlcjM="; 
         const link3 = "aHR0cHM6Ly9naXRodWIuY29t";
 
